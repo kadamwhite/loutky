@@ -4,6 +4,7 @@
   "description": "A Marionette.js starter kit",
   "main": "server.js",
   "scripts": {
+    "postinstall": "bower install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/kadamwhite/loutky/issues"
   },
-  "homepage": "https://github.com/kadamwhite/loutky"
+  "homepage": "https://github.com/kadamwhite/loutky",
+  "devDependencies": {
+    "bower": "^1.3.12"
+  }
 }

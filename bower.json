@@ -1,0 +1,28 @@
+{
+  "name": "loutky",
+  "version": "0.0.1",
+  "authors": [
+    "K.Adam White <kadamwhite@gmail.com>"
+  ],
+  "description": "A Marionette.js starter kit",
+  "keywords": [
+    "backbone",
+    "marionette"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/kadamwhite/loutky",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/js/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone.radio": "~0.8.4",
+    "lodash": "~2.4.1",
+    "marionette": "~2.3.0"
+  }
+}
