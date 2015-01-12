@@ -1,5 +1,6 @@
-node_modules/  # node modules
-public/js/lib/ # bower modules
+# node & bower modules:
+node_modules
+public/js/lib
 
 # Logs
 logs
