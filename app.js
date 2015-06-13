@@ -5,6 +5,9 @@ var logger = require( 'morgan' );
 var cookieParser = require( 'cookie-parser' );
 var bodyParser = require( 'body-parser' );
 
+var browserify = require( 'browserify-middleware' );
+var combynExpress = require( 'combynexpress' );
+
 var routes = require( './routes/index' );
 var users = require( './routes/users' );
 
@@ -12,8 +15,8 @@ var app = express(  );
 
 // View engine setup
 
-app.set( 'views', path.join( __dirname, 'views' ) );
-app.set( 'view engine', 'jade' );
+app.engine( 'html', combynExpress() );
+app.set( 'view engine', 'html' );
 
 // Logging & Parsing
 
@@ -25,8 +28,24 @@ app.use( cookieParser(  ) );
 
 // Middleware setup
 
-app.use( require( 'stylus' ).middleware( path.join( __dirname, 'public' ) ) );
-app.use( express.static( path.join( __dirname, 'public' ) ) );
+var publicDir = path.join( __dirname, 'public' );
+
+app.use( require( 'stylus' ).middleware( publicDir ) );
+
+// Specify transforms here (instead of package.json 'browserify' section) for obviousness
+browserify.settings({
+  debug: true,
+  transform: [
+    // Auto-parse combyne templates
+    [ 'combynify' ]
+  ]
+});
+
+// Bundle and serve first-party application code
+app.get( '/scripts/app.js', browserify( path.join( publicDir, 'scripts/app.js' ) ) );
+
+app.use( express.static( publicDir ) );
+
 
 // Routing
 
