@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require( 'express' );
 var path = require( 'path' );
 var favicon = require( 'serve-favicon' );
@@ -44,8 +46,8 @@ browserify.settings({
 // Bundle and serve first-party application code
 app.get( '/scripts/app.js', browserify( path.join( publicDir, 'scripts/app.js' ) ) );
 
+// For anything else, use static files
 app.use( express.static( publicDir ) );
-
 
 // Routing
 
