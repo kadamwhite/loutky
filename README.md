@@ -4,6 +4,12 @@ This is my own personal project boilerplate. It gives me (and you) an [Express](
 
 ## Installing & running the application
 
-To install, run `npm install`: this will pull down all the project's dependencies.
+From the command line, paste in these commands (on OSX: on Windows you're unfortunately on your own, since I made this for my personal OS-specific preferences) to pull down the boilerplate and initialize your repository.
+
+```bash
+git clone git@github.com:kadamwhite/loutky.git && ./loutky/init.sh
+```
+
+This will run the project setup script that will complete the installation.
 
 Once installed, use the command `npm start` to spin up the development server, which will then be accessible at [http://localhost:3000](http://localhost:3000)
