@@ -23,12 +23,12 @@ echo "" >> .git/info/exclude
 echo "*.sublime-project" >> .git/info/exclude
 echo "*.sublime-workspace" >> .git/info/exclude
 
+echo "Removing setup script..."
+rm init.sh
+
 echo "Creating first commit..."
 git add .
 git commit -am "Loutky boilerplate @ ${GIT_HASH}"
-
-echo "Removing setup script..."
-rm init.sh
 
 echo "Installing package dependencies..."
 npm install
