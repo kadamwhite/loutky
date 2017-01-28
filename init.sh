@@ -24,6 +24,24 @@ echo >> .git/info/exclude
 echo "*.sublime-project" >> .git/info/exclude
 echo "*.sublime-workspace" >> .git/info/exclude
 
+echo
+echo "Next, let's gather a little information about your project."
+echo
+read -p "What should the project name be for this project? (no spaces) " PROJECTNAME
+sed -i -e "s/INSERT_PROJECT_NAME/$PROJECTNAME/" package.json
+echo
+read -p "Provide a description of this project for package.json: " PROJECTDESC
+sed -i -e "s/INSERT_PROJECT_DESCRIPTION/$PROJECTDESC/" package.json
+echo
+read -p "Provide a project author for package.json: " AUTHOR
+sed -i -e "s/INSERT_AUTHOR_NAME/$AUTHOR/" package.json
+
+echo "package.json updated!"
+
+echo
+read -p "What should the HTML <title> attribute show? " HTMLTITLE
+sed -i -e "s/INSERT_PROJECT_TITLE/$HTMLTITLE/" src/index.html
+
 echo "Removing setup script..."
 rm init.sh
 
@@ -42,3 +60,6 @@ fi
 
 echo
 echo "Loutky project installed to ./$DIRNAME!"
+
+echo
+read -p "What should the project name be for this project? (no spaces) " PROJECTNAME
