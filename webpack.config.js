@@ -12,39 +12,39 @@ module.exports = {
   context: resolve(__dirname, 'src'),
 
   entry: [
-    'react-hot-loader/patch',
     // activate HMR for React
+    'react-hot-loader/patch',
 
-    'webpack-dev-server/client?http://localhost:8080',
     // bundle the client for webpack-dev-server
     // and connect to the provided endpoint
+    'webpack-dev-server/client?http://localhost:8080',
 
-    'webpack/hot/only-dev-server',
     // bundle the client for hot reloading
     // only- means to only hot reload for successful updates
+    'webpack/hot/only-dev-server',
 
     './index.jsx',
   ],
 
   output: {
-    filename: 'bundle.js',
     // the output bundle
+    filename: 'bundle.js',
 
     path: resolve(__dirname, 'dist'),
 
-    publicPath: '/'
     // necessary for HMR to know where to load the hot update chunks
+    publicPath: '/'
   },
 
   devServer: {
-    hot: true,
     // enable HMR on the server
+    hot: true,
 
-    contentBase: resolve(__dirname, 'dist'),
     // match the output path
+    contentBase: resolve(__dirname, 'dist'),
 
-    publicPath: '/'
     // match the output `publicPath`
+    publicPath: '/'
   },
 
   module: {
