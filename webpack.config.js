@@ -6,6 +6,11 @@ const objectHash = require('node-object-hash');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
+const hardSourceCacheDir = findCacheDir({
+  // Render into node_modules/.cache/hard-source/[confighash]/...
+  name: 'hard-source/[confighash]',
+});
+
 module.exports = {
   devtool: 'inline-source-map',
 
@@ -114,8 +119,8 @@ module.exports = {
 
     // Use hard source caching for faster rebuilds
     new HardSourceWebpackPlugin({
-      cacheDirectory: resolve(__dirname, '.cache/webpack-source/[confighash]'),
-      recordsPath: resolve(__dirname, '.cache/webpack-source/[confighash]', 'records.json'),
+      cacheDirectory: hardSourceCacheDir,
+      recordsPath: resolve(hardSourceCacheDir, 'records.json'),
 
       // Build a string value used by HardSource to determine which cache to
       // use if [confighash] is in cacheDirectory, or if the cache should be
