@@ -89,6 +89,7 @@ module.exports = {
 
     // Minify with UglifyJS
     new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
       compress: {
         warnings: false,
       },

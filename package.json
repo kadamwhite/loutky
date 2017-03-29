@@ -14,6 +14,7 @@
   ],
   "scripts": {
     "build": "webpack",
+    "prebuild:prod": "rimraf dist/",
     "build:prod": "webpack --config webpack.config.prod.js",
     "start": "webpack-dev-server",
     "lint": "eslint --ext js,jsx src",
@@ -45,6 +46,7 @@
     "html-webpack-plugin": "^2.26.0",
     "node-object-hash": "^1.1.5",
     "postcss-loader": "^1.2.2",
+    "rimraf": "^2.6.1",
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.4.0",
