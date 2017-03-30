@@ -38,7 +38,7 @@ module.exports = {
     path: resolve(__dirname, 'dist'),
 
     // necessary for HMR to know where to load the hot update chunks
-    publicPath: '/'
+    publicPath: '/',
   },
 
   devServer: {
@@ -49,7 +49,7 @@ module.exports = {
     contentBase: resolve(__dirname, 'dist'),
 
     // match the output `publicPath`
-    publicPath: '/'
+    publicPath: '/',
   },
 
   module: {
@@ -65,12 +65,12 @@ module.exports = {
               // directory for faster rebuilds. We use findCacheDir() because of:
               // https://github.com/facebookincubator/create-react-app/issues/483
               cacheDirectory: findCacheDir({
-                name: 'react-scripts'
-              })
-            }
-          }
+                name: 'react-scripts',
+              }),
+            },
+          },
         ],
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.styl$/,
@@ -80,11 +80,11 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: true,
-              localIdentName: '[path][name]--[local]--[hash:base64:5]'
-            }
+              localIdentName: '[path][name]--[local]--[hash:base64:5]',
+            },
           },
           'postcss-loader', // See postcss.config.js for options
-          'stylus-loader'
+          'stylus-loader',
         ],
       },
       {
@@ -114,7 +114,7 @@ module.exports = {
 
     // Inject generated scripts into the src/index.html template
     new HtmlWebpackPlugin({
-      template: './index.html'
+      template: './index.html',
     }),
 
     // Use hard source caching for faster rebuilds
@@ -125,7 +125,7 @@ module.exports = {
       // Build a string value used by HardSource to determine which cache to
       // use if [confighash] is in cacheDirectory, or if the cache should be
       // replaced if [confighash] does not appear in cacheDirectory.
-      configHash: (webpackConfig) => objectHash().hash(webpackConfig)
+      configHash: webpackConfig => objectHash().hash(webpackConfig),
     }),
   ],
 

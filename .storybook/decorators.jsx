@@ -34,10 +34,8 @@ RouterContext.propTypes = {
 };
 
 // eslint-disable-next-line import/prefer-default-export
-export const withRouterContext = (story) => {
-  return (
-    <RouterContext>
-      {story()}
-    </RouterContext>
-  );
-};
+export const withRouterContext = story => (
+  <RouterContext>
+    {story()}
+  </RouterContext>
+);
