@@ -7,7 +7,7 @@ This is my own personal project boilerplate. It gives me (and you) a Webpack 2 b
 From the command line, paste in these commands to pull down the boilerplate and initialize your repository. (These commands are only tested on OSX/linux: on Windows you're unfortunately on your own, but I recommend investigating the Windows Subsystem for Linux.)
 
 ```bash
-git clone --depth 1 git@github.com:kadamwhite/loutky.git && ./loutky/init.sh
+git clone --depth 1 https://github.com/kadamwhite/loutky.git && ./loutky/init.sh
 ```
 
 This will run the project setup script that will complete the installation.

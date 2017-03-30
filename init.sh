@@ -45,6 +45,14 @@ echo
 read -p "What should the HTML <title> attribute show? " HTMLTITLE
 sed -i '' -e "s/INSERT_PROJECT_TITLE/$HTMLTITLE/" src/index.html
 
+# `-i ''` transforms in-place without making a backup
+sed -i '' -e "s/INSERT_PROJECT_DESCRIPTION/$PROJECTDESC/" \
+          -e "s/INSERT_PROJECT_TITLE/$HTMLTITLE/" \
+          BASICREADME.md
+mv BASICREADME.md README.md
+
+echo "README.md initialized!"
+
 echo "Removing setup script..."
 rm init.sh
 

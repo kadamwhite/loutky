@@ -6,45 +6,50 @@ const objectHash = require('node-object-hash');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
+const hardSourceCacheDir = findCacheDir({
+  // Render into node_modules/.cache/hard-source/[confighash]/...
+  name: 'hard-source/[confighash]',
+});
+
 module.exports = {
   devtool: 'inline-source-map',
 
   context: resolve(__dirname, 'src'),
 
   entry: [
-    'react-hot-loader/patch',
     // activate HMR for React
+    'react-hot-loader/patch',
 
-    'webpack-dev-server/client?http://localhost:8080',
     // bundle the client for webpack-dev-server
     // and connect to the provided endpoint
+    'webpack-dev-server/client?http://localhost:8080',
 
-    'webpack/hot/only-dev-server',
     // bundle the client for hot reloading
     // only- means to only hot reload for successful updates
+    'webpack/hot/only-dev-server',
 
     './index.jsx',
   ],
 
   output: {
-    filename: 'bundle.js',
     // the output bundle
+    filename: 'bundle.js',
 
     path: resolve(__dirname, 'dist'),
 
-    publicPath: '/'
     // necessary for HMR to know where to load the hot update chunks
+    publicPath: '/',
   },
 
   devServer: {
-    hot: true,
     // enable HMR on the server
+    hot: true,
 
-    contentBase: resolve(__dirname, 'dist'),
     // match the output path
+    contentBase: resolve(__dirname, 'dist'),
 
-    publicPath: '/'
     // match the output `publicPath`
+    publicPath: '/',
   },
 
   module: {
@@ -60,12 +65,12 @@ module.exports = {
               // directory for faster rebuilds. We use findCacheDir() because of:
               // https://github.com/facebookincubator/create-react-app/issues/483
               cacheDirectory: findCacheDir({
-                name: 'react-scripts'
-              })
-            }
-          }
+                name: 'react-scripts',
+              }),
+            },
+          },
         ],
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.styl$/,
@@ -75,17 +80,24 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: true,
-              localIdentName: '[path][name]--[local]--[hash:base64:5]'
-            }
+              localIdentName: '[path][name]--[local]--[hash:base64:5]',
+            },
           },
           'postcss-loader', // See postcss.config.js for options
-          'stylus-loader'
+          'stylus-loader',
         ],
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        loader: 'url-loader?limit=10000'
-      }
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+            },
+          },
+        ],
+      },
     ],
   },
 
@@ -102,18 +114,18 @@ module.exports = {
 
     // Inject generated scripts into the src/index.html template
     new HtmlWebpackPlugin({
-      template: './index.html'
+      template: './index.html',
     }),
 
     // Use hard source caching for faster rebuilds
     new HardSourceWebpackPlugin({
-      cacheDirectory: resolve(__dirname, '.cache/webpack-source/[confighash]'),
-      recordsPath: resolve(__dirname, '.cache/webpack-source/[confighash]', 'records.json'),
+      cacheDirectory: hardSourceCacheDir,
+      recordsPath: resolve(hardSourceCacheDir, 'records.json'),
 
       // Build a string value used by HardSource to determine which cache to
       // use if [confighash] is in cacheDirectory, or if the cache should be
       // replaced if [confighash] does not appear in cacheDirectory.
-      configHash: (webpackConfig) => objectHash().hash(webpackConfig)
+      configHash: webpackConfig => objectHash().hash(webpackConfig),
     }),
   ],
 
