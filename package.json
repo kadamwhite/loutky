@@ -14,13 +14,13 @@
   ],
   "scripts": {
     "build": "webpack",
-    "prebuild:prod": "rimraf dist/",
+    "build-storybook": "build-storybook",
     "build:prod": "webpack --config webpack.config.prod.js",
+    "lint": "eslint --ext js,jsx ./*.js src jest .storybook",
+    "prebuild:prod": "rimraf dist/",
     "start": "webpack-dev-server",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "lint": "eslint --ext js,jsx ./*.js src jest .storybook",
-    "test": "node jest/run.js --watch"
+    "test": "node jest/run.js"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -39,10 +39,15 @@
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js|jsx)$"
   },
   "dependencies": {
+    "babel-polyfill": "^6.23.0",
     "d3": "^4.4.4",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-hot-loader": "^3.0.0-beta.6"
+    "react-hot-loader": "^3.0.0-beta.6",
+    "react-redux": "^5.0.3",
+    "redux": "^3.6.0",
+    "redux-logger": "^3.0.0",
+    "redux-saga": "^0.14.4"
   },
   "devDependencies": {
     "@kadira/storybook": "^2.21.0",
@@ -55,8 +60,10 @@
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.22.0",
     "css-loader": "^0.26.1",
+    "enzyme": "^2.8.0",
     "eslint": "^3.14.1",
     "eslint-config-airbnb": "^14.0.0",
+    "eslint-loader": "^1.7.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.9.0",
@@ -69,7 +76,10 @@
     "jest": "^19.0.2",
     "node-object-hash": "^1.1.5",
     "postcss-loader": "^1.2.2",
+    "react-addons-test-utils": "^15.4.2",
+    "redux-saga-test-plan": "^2.3.0",
     "rimraf": "^2.6.1",
+    "sinon": "^2.1.0",
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.4.0",

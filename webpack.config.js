@@ -69,6 +69,15 @@ module.exports = {
               }),
             },
           },
+          // Before running code through babel, check it for lint errors
+          {
+            loader: 'eslint-loader',
+            options: {
+              // emit all errors as warnings: this lets us see all issues in the
+              // dev console, but the presence of errors will not block rebuilds
+              emitWarning: true,
+            },
+          },
         ],
         exclude: /node_modules/,
       },
