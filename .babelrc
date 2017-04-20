@@ -3,6 +3,10 @@
     // webpack understands the native import syntax, and uses it for tree shaking
     ["es2015", {"modules": false}],
 
+    // utilize babel-preset-env to control what subset of ES is transpiled based
+    // on browser release recency and overall browser usage statistics
+    ["env", { "targets": { "browsers": ["> 3%", "last 3 versions"] } }],
+
     // Transpile React components to JavaScript
     "react"
   ],
