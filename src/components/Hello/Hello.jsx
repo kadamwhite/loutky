@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './Hello.styl';
 import moogle from './mini_moogle_by_morganedematons-d57jb7w.gif';
@@ -10,7 +11,7 @@ const Hello = ({ addressee }) => (
 );
 
 Hello.propTypes = {
-  addressee: React.PropTypes.string.isRequired,
+  addressee: PropTypes.string.isRequired,
 };
 
 export default Hello;
