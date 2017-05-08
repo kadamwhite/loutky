@@ -12,28 +12,39 @@ const hardSourceCacheDir = findCacheDir({
 });
 
 module.exports = {
-  devtool: 'inline-source-map',
+  devtool: 'cheap-module-source-map',
 
   context: resolve(__dirname, 'src'),
 
-  entry: [
-    // activate HMR for React
-    'react-hot-loader/patch',
+  entry: {
+    dependencies: [
+      'babel-polyfill',
+      'prop-types',
+      'query-string',
+      'react',
+      'react-dom',
+      'react-hot-loader',
+      'react-redux',
+      'redux-logger',
+      'redux-saga',
 
-    // bundle the client for webpack-dev-server
-    // and connect to the provided endpoint
-    'webpack-dev-server/client?http://localhost:8080',
+      // activate HMR for React
+      'react-hot-loader/patch',
 
-    // bundle the client for hot reloading
-    // only- means to only hot reload for successful updates
-    'webpack/hot/only-dev-server',
+      // bundle the client for webpack-dev-server
+      // and connect to the provided endpoint
+      'webpack-dev-server/client?http://localhost:8080',
 
-    './index.jsx',
-  ],
+      // bundle the client for hot reloading
+      // only- means to only hot reload for successful updates
+      'webpack/hot/only-dev-server',
+    ],
+    app: './index.jsx',
+  },
 
   output: {
     // the output bundle
-    filename: 'bundle.js',
+    filename: '[name].js',
 
     path: resolve(__dirname, 'dist'),
 
@@ -124,6 +135,14 @@ module.exports = {
     // Inject generated scripts into the src/index.html template
     new HtmlWebpackPlugin({
       template: './index.html',
+    }),
+
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'dependencies',
+      filename: 'dependencies.js',
+
+      // (with more entries, this ensures that no other module goes into the vendor chunk)
+      minChunks: Infinity,
     }),
 
     // Use hard source caching for faster rebuilds
