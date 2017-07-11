@@ -1,6 +1,3 @@
-// Support all ES6 functionality, particularly the generators used by sagas
-import 'babel-polyfill';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 

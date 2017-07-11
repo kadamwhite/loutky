@@ -50,10 +50,17 @@ module.exports = {
               loader: 'css-loader',
               options: {
                 modules: true,
+                sourceMap: true,
                 localIdentName: '[path][name]--[local]--[hash:base64:5]',
               },
             },
-            'postcss-loader', // See postcss.config.js for options
+            {
+              loader: 'postcss-loader',
+              // See postcss.config.js for other options
+              options: {
+                sourceMap: true,
+              },
+            },
             'stylus-loader',
           ],
         }),
@@ -94,6 +101,9 @@ module.exports = {
         warnings: false,
       },
     }),
+
+    // "Scope Hoisting" with Webpack 3's Module Concatenation Plugin
+    new webpack.optimize.ModuleConcatenationPlugin(),
   ],
 
 };

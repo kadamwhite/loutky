@@ -18,7 +18,10 @@ module.exports = {
 
   entry: {
     dependencies: [
+      // Support all ES6 functionality, particularly the generators used by sagas
       'babel-polyfill',
+
+      // Common dependencies
       'prop-types',
       'query-string',
       'react',
@@ -100,10 +103,17 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: true,
+              sourceMap: true,
               localIdentName: '[path][name]--[local]--[hash:base64:5]',
             },
           },
-          'postcss-loader', // See postcss.config.js for options
+          {
+            loader: 'postcss-loader',
+            // See postcss.config.js for other options
+            options: {
+              sourceMap: true,
+            },
+          },
           'stylus-loader',
         ],
       },
